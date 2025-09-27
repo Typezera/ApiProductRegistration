@@ -4,10 +4,14 @@
     "module": "CommonJS",
     "rootDir": "./src",
     "outDir": "./dist",
+    "experimentalDecorators": true,
     "esModuleInterop": true,
     "strict": true,
+    "strictPropertyInitialization": false,
     "skipLibCheck": true,
-    "forceConsistentCasingInFileNames": true
+    "forceConsistentCasingInFileNames": true,
+
+    "emitDecoratorMetadata": true
   },
   "include": ["src"],
   "exclude": ["node_modules"]

@@ -1,3 +1,4 @@
+import userRouter from "./routes/User.routes";
 import express from "express";
 import swaggerUi from "swagger-ui-express";
 import swaggerJsdoc from "swagger-jsdoc";
@@ -6,17 +7,11 @@ import { config } from "dotenv";
 config();
 
 const app = express();
+app.use(express.json());
 
-app.get("/", (req, res) => {
-  res.send("Hello World!");
-});
+app.use("/user", userRouter);
 
-const port = process.env.PORT || 8000;
-
-app.listen(port, () => {
-  console.log(`Server running on port ${port}`);
-});
-
+//Swagger configs/docs
 const swaggerOptions = {
   definition: {
     openapi: "3.0.0",
@@ -26,8 +21,10 @@ const swaggerOptions = {
       description: "Documentation of API Products Register",
     },
   },
-  apis: ["./src/routes/*.ts"],
+  apis: ["./src/routes/*.ts", "./src/docs/*.ts"],
 };
 
 const swaggerDoc = swaggerJsdoc(swaggerOptions);
 app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDoc));
+
+export default app;
