@@ -58,3 +58,16 @@
  *       404:
  *         description: User not found
  */
+
+/**
+ * @swagger
+ * /user:
+ *   get:
+ *     summary: Get all users
+ *     tags: [User]
+ *     responses:
+ *       200:
+ *         description: List of users
+ *       500:
+ *         description: Internal server error
+ */

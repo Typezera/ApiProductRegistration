@@ -28,4 +28,11 @@ export class UserService {
 
     return user;
   }
+
+  async findAll() {
+    return await this.userRepository.find({
+      order: { id: "DESC" },
+      relations: ["products"],
+    });
+  }
 }

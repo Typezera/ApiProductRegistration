@@ -1,5 +1,6 @@
 import { Request, Response } from "express";
 import { UserService } from "../service/user.service";
+import { QueryFailedError } from "typeorm";
 
 export class UserController {
   private readonly userService: UserService;
@@ -30,6 +31,21 @@ export class UserController {
       }
     } catch (error: any) {
       return res.status(500).json({ message: "Error to find user..." });
+    }
+  }
+
+  async findAll(req: Request, res: Response) {
+    try {
+      const users = await this.userService.findAll();
+      res.status(200).json(users);
+    } catch (error: unknown) {
+      if (error instanceof QueryFailedError) {
+        return res.status(500).json({ message: "Database query failed" });
+      }
+      if (error instanceof Error) {
+        return res.status(500).json({ message: error.message });
+      }
+      return res.status(500).json({ message: "Unexpected error" });
     }
   }
 }
