@@ -3,8 +3,6 @@ import bcrypt from "bcrypt";
 import { User } from "../entities/User";
 import { UserDto } from "../dto/user.dto";
 
-const userRepository = AppDataSource.getRepository(User);
-
 export class UserService {
   private userRepository = AppDataSource.getRepository(User);
 
