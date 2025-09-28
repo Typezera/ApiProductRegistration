@@ -4,6 +4,7 @@ import swaggerUi from "swagger-ui-express";
 import swaggerJsdoc from "swagger-jsdoc";
 import { config } from "dotenv";
 import authRouter from "./routes/Auth.routes";
+import productRouter from "./routes/product.routes";
 
 config();
 
@@ -14,6 +15,9 @@ app.use("/user", userRouter);
 
 //Auth router
 app.use("/", authRouter);
+
+//Product router
+app.use("/product", productRouter);
 
 //Swagger configs/docs
 const swaggerOptions = {
@@ -36,6 +40,16 @@ const swaggerOptions = {
     security: [
       {
         bearerAuth: [],
+      },
+    ],
+    tags: [
+      {
+        name: "User",
+        description: "User Endpoint",
+      },
+      {
+        name: "Product",
+        description: "Product Endpoint",
       },
     ],
   },

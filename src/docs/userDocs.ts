@@ -120,3 +120,34 @@
  *       401:
  *         description: Unauthorized
  */
+
+/**
+ * @swagger
+ * /product:
+ *   post:
+ *     summary: Create a product
+ *     description: This route is protected by JWT
+ *     tags: [Product]
+ *     security:
+ *       - bearerAuth: []
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               name:
+ *                 type: string
+ *                 example: Notebook Dell
+ *               price:
+ *                 type: number
+ *                 example: 3500
+ *     responses:
+ *       201:
+ *         description: Product created successfully
+ *       401:
+ *         description: Unauthorized
+ *       400:
+ *         description: Invalid data
+ */
