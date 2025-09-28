@@ -1,6 +1,7 @@
 import { AppDataSource } from "../config/data-source";
 import bcrypt from "bcrypt";
 import { User } from "../entities/User";
+import { UserDto } from "../dto/user.dto";
 
 const userRepository = AppDataSource.getRepository(User);
 
@@ -39,10 +40,15 @@ export class UserService {
     return user;
   }
 
-  async findAll() {
+  async findAll(): Promise<User[]> {
     return await this.userRepository.find({
       order: { id: "DESC" },
       relations: ["products"],
     });
   }
+
+  // return await this.userRepository.find({
+  //   order: { id: "DESC" },
+  //   relations: ["products"],
+  // });
 }

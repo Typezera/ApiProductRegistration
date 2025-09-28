@@ -3,6 +3,7 @@ import express from "express";
 import swaggerUi from "swagger-ui-express";
 import swaggerJsdoc from "swagger-jsdoc";
 import { config } from "dotenv";
+import authRouter from "./routes/Auth.routes";
 
 config();
 
@@ -10,6 +11,9 @@ const app = express();
 app.use(express.json());
 
 app.use("/user", userRouter);
+
+//Auth router
+app.use("/", authRouter);
 
 //Swagger configs/docs
 const swaggerOptions = {
@@ -20,6 +24,20 @@ const swaggerOptions = {
       version: "1.0.0",
       description: "Documentation of API Products Register",
     },
+    components: {
+      securitySchemes: {
+        bearerAuth: {
+          type: "http",
+          scheme: "bearer",
+          bearerFormat: "JWT",
+        },
+      },
+    },
+    security: [
+      {
+        bearerAuth: [],
+      },
+    ],
   },
   apis: ["./src/routes/*.ts", "./src/docs/*.ts"],
 };
